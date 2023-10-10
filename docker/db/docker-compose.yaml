@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    profiles:
+      - dev
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_DEV_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+  db_prod:
+    image: postgres
+    profiles:
+      - prod
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PROD_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_dev_data:
+  postgres_prod_data:
